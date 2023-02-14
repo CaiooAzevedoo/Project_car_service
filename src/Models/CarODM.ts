@@ -1,4 +1,5 @@
 import { model, Model, Schema, models } from 'mongoose';
+import Car from '../Domains/Car';
 import ICar from '../Interfaces/ICar';
 
 const carSchema = new Schema<ICar>({
@@ -22,6 +23,18 @@ class CarODM {
 
   public async create(car: ICar): Promise<ICar> {
     return this.model.create(car);
+  }
+
+  public async list(): Promise<ICar[]> {
+    return this.model.find();
+  }
+
+  public async findById(id: string): Promise<Car> {
+    const car = await this.model.findById(id);
+
+    if (!car) throw new Error('Car not found');
+
+    return new Car(car);
   }
 }
 

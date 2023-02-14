@@ -16,4 +16,32 @@ export default class CarService {
 
     return this.createCarDomain(newCar);
   }
+
+  public async listCar() {
+    const carODM = new CarODM();
+    const cars = await carODM.list();
+
+    const formattedCars = cars.map((car) => ({
+      id: car.id,
+      model: car.model,
+      year: car.year,
+      color: car.color,
+      status: car.status,
+      buyValue: car.buyValue,
+      doorsQty: car.doorsQty,
+      seatsQty: car.seatsQty,
+    }));
+
+    return formattedCars;
+  }
+
+  public async findCarById(id: string) {
+    const carODM = new CarODM();
+    try {
+      const car = await carODM.findById(id);
+      return car;
+    } catch {
+      throw new Error();
+    }
+  }
 }
