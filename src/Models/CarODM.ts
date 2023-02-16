@@ -36,6 +36,10 @@ class CarODM {
 
     return new Car(car);
   }
+
+  public async updateCar(newData: Partial<ICar>): Promise<ICar | null> {
+    return this.model.findByIdAndUpdate(newData, { new: true });
+  }
 }
 
 export default CarODM;

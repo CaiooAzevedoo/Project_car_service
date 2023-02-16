@@ -44,4 +44,23 @@ export default class CarService {
       throw new Error();
     }
   }
+
+  public async updateCar(newData: Partial<ICar>) {
+    const carODM = new CarODM();
+    const car = await carODM.updateCar(newData);
+
+    if (car) {
+      const updatedCar = { 
+        model: car.model,
+        year: car.year,
+        color: car.color,
+        status: car.status,
+        buyValue: car.buyValue,
+        doorsQty: car.doorsQty,
+        seatsQty: car.seatsQty,
+      };
+
+      return updatedCar;
+    }
+  }
 }
