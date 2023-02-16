@@ -60,17 +60,16 @@ class CarController {
 
   public async updateCar() {
     const { id } = this.req.params;
-    const newInfo = this.req.body;
+    const newData = this.req.body;
 
     try {
-      const car = await this.service.findCarById(id);
-      return this.res.status(200).json(car);
+      await this.service.findCarById(id);
     } catch (error) {
       if (error instanceof Error) return this.res.status(404).json({ message: 'Car not found' });
       this.next(error);
     }
     
-    const newCar = await this.service.updateCar(id, newInfo);
+    const newCar = await this.service.updateCar(id, newData);
     
     return this.res.status(200).json(newCar);
   }

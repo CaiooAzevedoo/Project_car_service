@@ -51,6 +51,7 @@ export default class CarService {
     try {
       if (car) {
         const updatedCar = {
+          id: car.id,
           model: car.model,
           year: car.year,
           color: car.color,
