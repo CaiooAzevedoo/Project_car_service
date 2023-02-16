@@ -14,7 +14,6 @@ export default class Vehicle {
     this.year = vehicleParameters.year;
     this.color = vehicleParameters.color;
     this.status = vehicleParameters.status;
-    this.status = vehicleParameters.status;
     this.buyValue = vehicleParameters.buyValue;
   }
 }

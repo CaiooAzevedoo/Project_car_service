@@ -45,22 +45,25 @@ export default class CarService {
     }
   }
 
-  public async updateCar(newData: Partial<ICar>) {
+  public async updateCar(id: string, newData: Partial<ICar>) {
     const carODM = new CarODM();
-    const car = await carODM.updateCar(newData);
-
-    if (car) {
-      const updatedCar = { 
-        model: car.model,
-        year: car.year,
-        color: car.color,
-        status: car.status,
-        buyValue: car.buyValue,
-        doorsQty: car.doorsQty,
-        seatsQty: car.seatsQty,
-      };
-
-      return updatedCar;
+    const car = await carODM.updateCar(id, newData);
+    try {
+      if (car) {
+        const updatedCar = {
+          model: car.model,
+          year: car.year,
+          color: car.color,
+          status: car.status,
+          buyValue: car.buyValue,
+          doorsQty: car.doorsQty,
+          seatsQty: car.seatsQty,
+        };
+  
+        return updatedCar;
+      }
+    } catch {
+      throw new Error();
     }
   }
 }

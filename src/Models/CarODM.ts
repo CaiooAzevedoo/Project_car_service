@@ -37,8 +37,8 @@ class CarODM {
     return new Car(car);
   }
 
-  public async updateCar(newData: Partial<ICar>): Promise<ICar | null> {
-    return this.model.findByIdAndUpdate(newData, { new: true });
+  public async updateCar(id: string, newData: Partial<ICar>): Promise<ICar | null> {
+    return this.model.findByIdAndUpdate(id, newData, { new: true });
   }
 }
 
