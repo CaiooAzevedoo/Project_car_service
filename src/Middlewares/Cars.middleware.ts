@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { Types } from 'mongoose';
+import { isValidObjectId } from 'mongoose';
 
 class ValidId {
   public static verify(
@@ -9,7 +9,7 @@ class ValidId {
   ) {
     const { id } = req.params;
 
-    if (!Types.ObjectId.isValid(id)) { 
+    if (!isValidObjectId(id)) { 
       return res.status(422).json({ message: 'Invalid mongo id' }); 
     }
 

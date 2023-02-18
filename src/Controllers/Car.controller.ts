@@ -37,7 +37,7 @@ class CarController {
       const newCar = await this.service.createCar(car);
       return this.res.status(201).json(newCar);
     } catch (error) {
-      this.next(error);
+      this.next();
     }
   }
 
@@ -65,8 +65,8 @@ class CarController {
     try {
       await this.service.findCarById(id);
     } catch (error) {
-      if (error instanceof Error) return this.res.status(404).json({ message: 'Car not found' });
-      this.next(error);
+      if (error) return this.res.status(404).json({ message: 'Car not found' });
+      this.next();
     }
     
     const newCar = await this.service.updateCar(id, newData);

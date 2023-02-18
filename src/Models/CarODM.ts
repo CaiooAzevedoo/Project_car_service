@@ -32,7 +32,7 @@ class CarODM {
   public async findById(id: string): Promise<Car> {
     const car = await this.model.findById(id);
 
-    if (!car) throw new Error('Car not found');
+    if (!car) throw new Error();
 
     return new Car(car);
   }
