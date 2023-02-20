@@ -51,27 +51,6 @@ describe('Testa os serviços relacionados a Car', function () {
     },
   ];
 
-  // const carUpdatedInputMock: ICar = {
-  //   model: 'Marea',
-  //   year: 2002,
-  //   color: 'Black',
-  //   status: true,
-  //   buyValue: 15.990,
-  //   doorsQty: 4,
-  //   seatsQty: 5,
-  // };
-
-  // const carUpdatedOutputMock: ICar = {
-  //   id: '6348513f34c397abcad040b2',
-  //   model: 'Marea',
-  //   year: 2002,
-  //   color: 'Black',
-  //   status: true,
-  //   buyValue: 12.000,
-  //   doorsQty: 4,
-  //   seatsQty: 5,
-  // };
-
   it('Testa se um carro é registrado com sucesso', async function () {
     // arrange
     Sinon.stub(Model, 'create').resolves(carOutputMock);
@@ -114,6 +93,22 @@ describe('Testa os serviços relacionados a Car', function () {
       } catch (error) {
         // assert
         expect((error as Error).message).to.be.equal('Car not found');
+      }
+    },
+  );
+
+  it(
+    'Testa se uma mensagem de error é retornada ao enviar um ID fora do padrão', 
+    async function () {
+      // arrange
+      Sinon.stub(Model, 'findById').resolves({});
+      // act
+      try {
+        const service = new CarService();
+        await service.findCarById('11');
+      } catch (error) {
+        // assert
+        expect((error as Error).message).to.be.equal('Invalid mongo id');
       }
     },
   );
