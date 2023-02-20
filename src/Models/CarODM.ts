@@ -1,28 +1,20 @@
-import { model, Model, Schema, models } from 'mongoose';
+import { Schema } from 'mongoose';
 import Car from '../Domains/Car';
 import ICar from '../Interfaces/ICar';
+import AbstractODM from './AbstractODM';
 
-const carSchema = new Schema<ICar>({
-  model: { type: String, require: true },
-  year: { type: Number, require: true },
-  color: { type: String, required: true },
-  status: { type: Boolean, required: false, default: false },
-  buyValue: { type: Number, required: true },
-  doorsQty: { type: Number, required: true },
-  seatsQty: { type: Number, required: true },
-});
-
-class CarODM {
-  private schema: Schema;
-  private model: Model<ICar>;
-
+class CarODM extends AbstractODM<ICar> {
   constructor() {
-    this.schema = carSchema;
-    this.model = models.Car || model('Car', this.schema);
-  }
-
-  public async create(car: ICar): Promise<ICar> {
-    return this.model.create(car);
+    const schema = new Schema<ICar>({
+      model: { type: String, require: true },
+      year: { type: Number, require: true },
+      color: { type: String, required: true },
+      status: { type: Boolean, required: false, default: false },
+      buyValue: { type: Number, required: true },
+      doorsQty: { type: Number, required: true },
+      seatsQty: { type: Number, required: true },
+    });
+    super(schema, 'Car');
   }
 
   public async find(): Promise<ICar[]> {
@@ -35,10 +27,6 @@ class CarODM {
     if (!car) throw new Error();
 
     return new Car(car);
-  }
-
-  public async update(id: string, newData: Partial<ICar>): Promise<ICar | null> {
-    return this.model.findByIdAndUpdate(id, newData, { new: true });
   }
 }
 
