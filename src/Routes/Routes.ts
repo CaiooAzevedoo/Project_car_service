@@ -17,10 +17,12 @@ routes.put(
   ValidId.verify,
   (req, res, next) => new CarController(req, res, next).update(),
 );
+
 routes.post('/motorcycles', (req, res, next) => new MotorcycleController(req, res, next).create());
 routes.get('/motorcycles', (req, res, next) => new MotorcycleController(req, res, next).find());
 routes.get(
   '/motorcycles/:id',
+  ValidId.verify,
   (req, res, next) => new MotorcycleController(req, res, next).findById(),
 );
 routes.put(

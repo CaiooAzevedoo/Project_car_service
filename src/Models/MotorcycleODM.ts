@@ -14,7 +14,7 @@ class MotorcycleODM extends AbstractODM<IMotorcycle> {
       category: { type: String, required: true },
       engineCapacity: { type: Number, required: true },
     });
-    super(schema, 'Motocycle');
+    super(schema, 'Motorcycle');
   }
 
   public async find(): Promise<IMotorcycle[]> {

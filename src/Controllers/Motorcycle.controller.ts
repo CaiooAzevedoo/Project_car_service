@@ -51,7 +51,6 @@ class MotorcycleController {
 
     try {
       const moto = await this.service.findById(id);
-
       return this.res.status(200).json(moto);
     } catch (error) {
       return this.res.status(404).json({ message: 'Motorcycle not found' });
