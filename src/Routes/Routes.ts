@@ -5,7 +5,7 @@ import ValidId from '../Middlewares/Cars.middleware';
 const routes = Router();
 
 routes.post('/cars', (req, res, next) => new CarController(req, res, next).create());
-routes.get('/cars', (req, res, next) => new CarController(req, res, next).list());
+routes.get('/cars', (req, res, next) => new CarController(req, res, next).find());
 routes.get(
   '/cars/:id',
   ValidId.verify,
@@ -14,7 +14,7 @@ routes.get(
 routes.put(
   '/cars/:id',
   ValidId.verify,
-  (req, res, next) => new CarController(req, res, next).updateCar(),
+  (req, res, next) => new CarController(req, res, next).update(),
 );
 
 export default routes;

@@ -17,9 +17,9 @@ export default class CarService {
     return this.createCarDomain(newCar);
   }
 
-  public async listCar() {
+  public async find() {
     const carODM = new CarODM();
-    const cars = await carODM.list();
+    const cars = await carODM.find();
 
     const formattedCars = cars.map((car) => ({
       id: car.id,
@@ -41,13 +41,13 @@ export default class CarService {
       const car = await carODM.findById(id);
       return car;
     } catch {
-      throw new Error();
+      throw new Error('Invalid mongo id');
     }
   }
 
-  public async updateCar(id: string, newData: Partial<ICar>) {
+  public async update(id: string, newData: Partial<ICar>) {
     const carODM = new CarODM();
-    const car = await carODM.updateCar(id, newData);
+    const car = await carODM.update(id, newData);
     try {
       if (car) {
         const updatedCar = {

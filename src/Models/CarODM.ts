@@ -25,7 +25,7 @@ class CarODM {
     return this.model.create(car);
   }
 
-  public async list(): Promise<ICar[]> {
+  public async find(): Promise<ICar[]> {
     return this.model.find();
   }
 
@@ -37,7 +37,7 @@ class CarODM {
     return new Car(car);
   }
 
-  public async updateCar(id: string, newData: Partial<ICar>): Promise<ICar | null> {
+  public async update(id: string, newData: Partial<ICar>): Promise<ICar | null> {
     return this.model.findByIdAndUpdate(id, newData, { new: true });
   }
 }

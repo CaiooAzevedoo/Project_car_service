@@ -41,8 +41,8 @@ class CarController {
     }
   }
 
-  public async list() {
-    const cars = await this.service.listCar();
+  public async find() {
+    const cars = await this.service.find();
     return this.res.status(200).json(cars);
   }
 
@@ -58,7 +58,7 @@ class CarController {
     }
   }
 
-  public async updateCar() {
+  public async update() {
     const { id } = this.req.params;
     const newData = this.req.body;
 
@@ -69,7 +69,7 @@ class CarController {
       this.next();
     }
     
-    const newCar = await this.service.updateCar(id, newData);
+    const newCar = await this.service.update(id, newData);
     
     return this.res.status(200).json(newCar);
   }
