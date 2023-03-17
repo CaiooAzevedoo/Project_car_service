@@ -115,7 +115,15 @@ describe('Testa os serviços relacionados a Car', function () {
 
   it('Testa se é possível alterar um carro', async function () {
     // arrange
-    Sinon.stub(Model, 'update').resolves();
+    Sinon.stub(Model, 'findByIdAndUpdate').resolves(carListOutputMock[1]);
+    // act
+
+    const service = new CarService();
+    const outPut = await service.update('634852326b35b59438fbea31', carListOutputMock[1]);
+
+    // assert
+
+    expect(outPut).to.be.deep.equal(carListOutputMock[1]);
   });
 
   afterEach(function () {
